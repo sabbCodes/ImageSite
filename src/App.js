@@ -4,17 +4,14 @@ import { initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import Login from './components/Login';
 import Gallery from './components/Gallery';
-// import { DragDropContextProvider } from 'react-dnd';
 import { HTML5Backend } from 'react-dnd-html5-backend';
 import { DndProvider } from 'react-dnd';
-// import { HTML5Backend } from 'react-dnd-html5-backend';
 
 
 const App = () => {
   const [authenticated, setAuthenticated] = useState(false);
 
   useEffect(() => {
-    // Initialize the Firebase app
     const firebaseConfig = {
       apiKey: "AIzaSyAM-F4pciMf_WxjxVbgJQhio_OUPJNp4E0",
       authDomain: "imagesite-91298.firebaseapp.com",
@@ -26,10 +23,8 @@ const App = () => {
 
     const app = initializeApp(firebaseConfig);
 
-    // Get the Firebase auth instance
     const auth = getAuth(app);
 
-    // Listen for changes to the user's authentication status
     onAuthStateChanged(auth, (user) => {
       setAuthenticated(!!user);
     });

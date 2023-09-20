@@ -4,23 +4,19 @@ import { getAuth, signInWithEmailAndPassword } from 'firebase/auth'; // Import F
 const Login = ({ onLogin }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [error, setError] = useState(false)
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
     try {
-      // Get the Firebase auth instance
       const auth = getAuth();
 
-      // Sign in with Firebase Authentication
       await signInWithEmailAndPassword(auth, email, password);
 
-      // If successful, call onLogin(true)
       onLogin(true);
     } catch (error) {
-      // Handle authentication errors
-      alert('Authentication failed. Please check your email and password.');
-      console.error('Authentication Error:', error);
+      setError(true)
     }
   };
 
@@ -47,6 +43,7 @@ const Login = ({ onLogin }) => {
               required
             />
           </div>
+          {error && <p className='errorMessage'>Invalid login credentials. Please check your email and password.</p>}
           <div className="loginButton">
             <button type="submit" className="login-button">Login</button>
           </div>
